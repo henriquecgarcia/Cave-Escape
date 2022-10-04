@@ -7,16 +7,23 @@ var health = 100
 var velocity = Vector2()
 var lastShoot = Time
 var isDead = false
+var first = true
 var player
+
+func _ready():
+	var kids = get_tree().get_root().get_child(0).get_children()
+	if not player:
+		for kid in kids:
+			if kid.get_name() == "Player":
+				player = kid
+				break
 
 func _physics_process(delta):
 	if isDead:
+		if first:
+			return
+		$Model.modulate.a = $Timer.time_left/3
 		return
-	var kids = get_tree().get_root().get_child(0).get_children()
-	if not player:
-			for kid in kids:
-				if kid.get_name() == "Player":
-					player = kid
 	
 	if not player:
 		return
@@ -42,7 +49,7 @@ func _physics_process(delta):
 func Kill():
 	$Collision.free()
 	isDead = true
-	$Timer.start(.8)
+	$Timer.start(1)
 
 func IsAlive():
 	return not isDead
@@ -54,8 +61,7 @@ func DoDamage(dmg):
 		Kill()
 
 func _on_Timer_timeout():
-	$Model.modulate.a = ($Model.modulate.a)/2
-	if $Model.modulate.a > 0.1:
-		$Timer.start(.8)
-	else:
+	if not first:
 		queue_free()
+	first = false
+	$Timer.start(3)
