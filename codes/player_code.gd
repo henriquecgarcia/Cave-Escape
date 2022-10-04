@@ -8,6 +8,14 @@ var velocity = Vector2()
 var lastShoot = Time
 var projectile = preload("res://codes/Bullet.tscn")
 
+var bNode
+func _ready():
+	var kids = get_parent().get_children()
+	for kid in kids:
+		if kid.get_name() == "Bullets":
+			bNode = kid
+			break
+
 func get_input():
 	velocity = Vector2()
 	if Input.is_action_pressed("ui_left") or Input.is_key_pressed(KEY_A):
@@ -24,10 +32,11 @@ func get_input():
 		shoot()
 
 func shoot():
-	# "Muzzle" is a Position2D placed at the barrel of the gun.
+	if not bNode: # should not be happening.
+		return
 	var b = projectile.instance()
 	b.start($Gun.global_position, rotation)
-	get_parent().add_child(b)
+	bNode.add_child(b)
 
 func _physics_process(delta):
 	if isDead:
