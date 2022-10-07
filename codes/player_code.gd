@@ -18,14 +18,14 @@ func _ready():
 
 func get_input():
 	velocity = Vector2()
-	if Input.is_action_pressed("ui_left") or Input.is_key_pressed(KEY_A):
+	if Input.is_action_pressed("ui_left"):
 		velocity.x = -SPEED
-	elif Input.is_action_pressed("ui_right") or Input.is_key_pressed(KEY_D):
+	elif Input.is_action_pressed("ui_right"):
 		velocity.x =  SPEED
 		
-	if Input.is_action_pressed("ui_up") or Input.is_key_pressed(KEY_W):
+	if Input.is_action_pressed("ui_up"):
 		velocity.y = -SPEED
-	elif Input.is_action_pressed("ui_down") or Input.is_key_pressed(KEY_S):
+	elif Input.is_action_pressed("ui_down"):
 		velocity.y = SPEED
 
 	if Input.is_key_pressed(KEY_SPACE):

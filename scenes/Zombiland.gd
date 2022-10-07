@@ -1,20 +1,23 @@
 extends Node2D
 
-var Zombies
-var curZombies
+onready var Zombies = $Zombies
+onready var timer = $Zombie_Spawn_Timer
+
+var curZombies = 0
+var spawnedZombies = 0
 var zCode = preload("res://codes/Zombie.tscn")
 
 func createZombies(amount = 1):
 	for i in amount:
 		var b = zCode.instance()
-		#b.position = Vector2(randomize(), randomize())
+		b.position = Vector2(10, 10)
+		Zombies.add_child(b)
+		curZombies += 1
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	var kids = get_children()
-	for kid in kids:
-		if kid.get_name() == "Zombies":
-			Zombies = kid
-			break
-	
-	#
+	randomize()
+	timer.start(3)
+
+func _on_Zombie_Spawn_Timer_timeout():
+	createZombies(1)
+	timer.start(2)
