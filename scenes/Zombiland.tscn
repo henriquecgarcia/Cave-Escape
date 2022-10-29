@@ -15,7 +15,7 @@ extents = Vector2( 367.375, 5.00134 )
 script = ExtResource( 3 )
 
 [node name="TileMap" parent="." instance=ExtResource( 2 )]
-tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 19, 1, 0, 65536, 1, 0, 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 1, 0, 65544, 1, 0, 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65548, 1, 0, 65549, 1, 0, 65550, 1, 0, 65551, 1, 0, 65552, 1, 0, 65553, 2, 0, 65554, 1, 0, 65555, 1, 0, 131072, 1, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 1, 0, 131080, 1, 0, 131081, 1, 0, 131082, 1, 0, 131083, 1, 0, 131084, 1, 0, 131085, 1, 0, 131086, 1, 0, 131087, 2, 0, 131088, 1, 0, 131089, 1, 0, 131090, 1, 0, 131091, 1, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 1, 0, 196618, 1, 0, 196619, 3, 0, 196620, 1, 0, 196621, 1, 0, 196622, 1, 0, 196623, 1, 0, 196624, 1, 0, 196625, 1, 0, 196626, 1, 0, 196627, 1, 0, 262144, 1, 0, 262145, 1, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 3, 0, 262155, 1, 0, 262156, 1, 0, 262157, 3, 0, 262158, 1, 0, 262159, 1, 0, 262160, 1, 0, 262161, 1, 0, 262162, 1, 0, 262163, 1, 0, 327680, 1, 0, 327681, 1, 0, 327682, 1, 0, 327683, 3, 0, 327684, 3, 0, 327685, 3, 0, 327686, 3, 0, 327687, 3, 0, 327688, 3, 0, 327689, 3, 0, 327690, 1, 0, 327691, 1, 0, 327692, 1, 0, 327693, 1, 0, 327694, 1, 0, 327695, 1, 0, 327696, 1, 0, 327697, 1, 0, 327698, 1, 0, 327699, 2, 0, 393216, 1, 0, 393217, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 3, 0, 393221, 3, 0, 393222, 3, 0, 393223, 3, 0, 393224, 3, 0, 393225, 3, 0, 393226, 1, 0, 393227, 1, 0, 393228, 1, 0, 393229, 1, 0, 393230, 1, 0, 393231, 1, 0, 393232, 1, 0, 393233, 1, 0, 393234, 1, 0, 393235, 1, 0, 458752, 1, 0, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 1, 0, 458757, 3, 0, 458758, 3, 0, 458759, 3, 0, 458760, 3, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 2, 0, 458768, 1, 0, 458769, 1, 0, 458770, 1, 0, 458771, 1, 0, 524288, 1, 0, 524289, 1, 0, 524290, 1, 0, 524291, 1, 0, 524292, 1, 0, 524293, 1, 0, 524294, 1, 0, 524295, 3, 0, 524296, 1, 0, 524297, 1, 0, 524298, 1, 0, 524299, 1, 0, 524300, 1, 0, 524301, 1, 0, 524302, 1, 0, 524303, 1, 0, 524304, 2, 0, 524305, 1, 0, 524306, 1, 0, 524307, 1, 0, 589824, 1, 0, 589825, 1, 0, 589826, 1, 0, 589827, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 1, 0, 589831, 1, 0, 589832, 1, 0, 589833, 1, 0, 589834, 1, 0, 589835, 2, 0, 589836, 1, 0, 589837, 1, 0, 589838, 2, 0, 589839, 1, 0, 589840, 1, 0, 589841, 1, 0, 589842, 1, 0, 589843, 1, 0, 655360, 1, 0, 655361, 1, 0, 655362, 1, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 655370, 1, 0, 655371, 1, 0, 655372, 1, 0, 655373, 1, 0, 655374, 1, 0, 655375, 1, 0, 655376, 1, 0, 655377, 1, 0, 655378, 1, 0, 655379, 1, 0, 720896, 1, 0, 720897, 1, 0, 720898, 1, 0, 720899, 1, 0, 720900, 1, 0, 720901, 1, 0, 720902, 1, 0, 720903, 1, 0, 720904, 1, 0, 720905, 1, 0, 720906, 1, 0, 720907, 1, 0, 720908, 1, 0, 720909, 1, 0, 720910, 1, 0, 720911, 1, 0, 720912, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 1, 0 )
+tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 19, 1, 0, 65536, 1, 0, 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 1, 0, 65544, 1, 0, 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65548, 1, 0, 65549, 1, 0, 65550, 1, 0, 65551, 1, 0, 65552, 1, 0, 65553, 2, 0, 65554, 1, 0, 65555, 1, 0, 131072, 1, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 1, 0, 131080, 1, 0, 131081, 1, 0, 131082, 1, 0, 131083, 1, 0, 131084, 1, 0, 131085, 1, 0, 131086, 1, 0, 131087, 2, 0, 131088, 1, 0, 131089, 1, 0, 131090, 1, 0, 131091, 1, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 1, 0, 196618, 1, 0, 196619, 3, 0, 196620, 1, 0, 196621, 1, 0, 196622, 1, 0, 196623, 1, 0, 196624, 1, 0, 196625, 1, 0, 196626, 1, 0, 196627, 1, 0, 262144, 1, 0, 262145, 1, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 3, 0, 262155, 1, 0, 262156, 1, 0, 262157, 3, 0, 262158, 1, 0, 262159, 1, 0, 262160, 1, 0, 262161, 1, 0, 262162, 1, 0, 262163, 1, 0, 327680, 1, 0, 327681, 1, 0, 327682, 1, 0, 327683, 3, 0, 327684, 3, 0, 327685, 3, 0, 327686, 3, 0, 327687, 3, 0, 327688, 3, 0, 327689, 3, 0, 327690, 1, 0, 327691, 1, 0, 327692, 1, 0, 327693, 1, 0, 327694, 1, 0, 327695, 1, 0, 327696, 1, 0, 327697, 1, 0, 327698, 1, 0, 327699, 1, 0, 393216, 1, 0, 393217, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 3, 0, 393221, 3, 0, 393222, 3, 0, 393223, 3, 0, 393224, 3, 0, 393225, 3, 0, 393226, 1, 0, 393227, 1, 0, 393228, 1, 0, 393229, 1, 0, 393230, 1, 0, 393231, 1, 0, 393232, 1, 0, 393233, 1, 0, 393234, 1, 0, 393235, 1, 0, 458752, 1, 0, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 1, 0, 458757, 3, 0, 458758, 3, 0, 458759, 3, 0, 458760, 3, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 2, 0, 458768, 1, 0, 458769, 1, 0, 458770, 1, 0, 458771, 1, 0, 524288, 1, 0, 524289, 1, 0, 524290, 1, 0, 524291, 1, 0, 524292, 1, 0, 524293, 1, 0, 524294, 1, 0, 524295, 3, 0, 524296, 1, 0, 524297, 1, 0, 524298, 1, 0, 524299, 1, 0, 524300, 1, 0, 524301, 1, 0, 524302, 1, 0, 524303, 1, 0, 524304, 2, 0, 524305, 1, 0, 524306, 1, 0, 524307, 1, 0, 589824, 1, 0, 589825, 1, 0, 589826, 1, 0, 589827, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 1, 0, 589831, 1, 0, 589832, 1, 0, 589833, 1, 0, 589834, 1, 0, 589835, 2, 0, 589836, 1, 0, 589837, 1, 0, 589838, 2, 0, 589839, 1, 0, 589840, 1, 0, 589841, 1, 0, 589842, 1, 0, 589843, 1, 0, 655360, 1, 0, 655361, 1, 0, 655362, 1, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 655370, 1, 0, 655371, 1, 0, 655372, 1, 0, 655373, 1, 0, 655374, 1, 0, 655375, 1, 0, 655376, 1, 0, 655377, 1, 0, 655378, 1, 0, 655379, 1, 0, 720896, 1, 0, 720897, 1, 0, 720898, 1, 0, 720899, 1, 0, 720900, 1, 0, 720901, 1, 0, 720902, 1, 0, 720903, 1, 0, 720904, 1, 0, 720905, 1, 0, 720906, 1, 0, 720907, 1, 0, 720908, 1, 0, 720909, 1, 0, 720910, 1, 0, 720911, 1, 0, 720912, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 1, 0 )
 
 [node name="Zombie" parent="." instance=ExtResource( 5 )]
 position = Vector2( 336, 208 )
@@ -48,5 +48,169 @@ rotation = -1.57079
 shape = SubResource( 2 )
 
 [node name="Zombie_Spawn_Timer" type="Timer" parent="."]
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="Spawn" type="Position2D" parent="Spawns"]
+position = Vector2( 29, 30 )
+
+[node name="Spawn2" type="Position2D" parent="Spawns"]
+position = Vector2( 33, 84 )
+
+[node name="Spawn3" type="Position2D" parent="Spawns"]
+position = Vector2( 71, 30 )
+
+[node name="Spawn4" type="Position2D" parent="Spawns"]
+position = Vector2( 104, 31 )
+
+[node name="Spawn5" type="Position2D" parent="Spawns"]
+position = Vector2( 151, 33 )
+
+[node name="Spawn6" type="Position2D" parent="Spawns"]
+position = Vector2( 197, 34 )
+
+[node name="Spawn7" type="Position2D" parent="Spawns"]
+position = Vector2( 245, 33 )
+
+[node name="Spawn8" type="Position2D" parent="Spawns"]
+position = Vector2( 314, 33 )
+
+[node name="Spawn9" type="Position2D" parent="Spawns"]
+position = Vector2( 358, 33 )
+
+[node name="Spawn10" type="Position2D" parent="Spawns"]
+position = Vector2( 412, 33 )
+
+[node name="Spawn11" type="Position2D" parent="Spawns"]
+position = Vector2( 488, 33 )
+
+[node name="Spawn12" type="Position2D" parent="Spawns"]
+position = Vector2( 550, 33 )
+
+[node name="Spawn13" type="Position2D" parent="Spawns"]
+position = Vector2( 621, 33 )
+
+[node name="Spawn14" type="Position2D" parent="Spawns"]
+position = Vector2( 678, 34 )
+
+[node name="Spawn15" type="Position2D" parent="Spawns"]
+position = Vector2( 746, 34 )
+
+[node name="Spawn16" type="Position2D" parent="Spawns"]
+position = Vector2( 810, 34 )
+
+[node name="Spawn17" type="Position2D" parent="Spawns"]
+position = Vector2( 870, 34 )
+
+[node name="Spawn18" type="Position2D" parent="Spawns"]
+position = Vector2( 931, 34 )
+
+[node name="Spawn19" type="Position2D" parent="Spawns"]
+position = Vector2( 984, 34 )
+
+[node name="Spawn20" type="Position2D" parent="Spawns"]
+position = Vector2( 1064, 34 )
+
+[node name="Spawn21" type="Position2D" parent="Spawns"]
+position = Vector2( 1123, 34 )
+
+[node name="Spawn22" type="Position2D" parent="Spawns"]
+position = Vector2( 1185, 34 )
+
+[node name="Spawn23" type="Position2D" parent="Spawns"]
+position = Vector2( 1241, 34 )
+
+[node name="Spawn24" type="Position2D" parent="Spawns"]
+position = Vector2( 1241, 84 )
+
+[node name="Spawn25" type="Position2D" parent="Spawns"]
+position = Vector2( 1241, 160 )
+
+[node name="Spawn26" type="Position2D" parent="Spawns"]
+position = Vector2( 1241, 208 )
+
+[node name="Spawn27" type="Position2D" parent="Spawns"]
+position = Vector2( 1241, 249 )
+
+[node name="Spawn28" type="Position2D" parent="Spawns"]
+position = Vector2( 1241, 287 )
+
+[node name="Spawn29" type="Position2D" parent="Spawns"]
+position = Vector2( 1241, 351 )
+
+[node name="Spawn30" type="Position2D" parent="Spawns"]
+position = Vector2( 1241, 397 )
+
+[node name="Spawn31" type="Position2D" parent="Spawns"]
+position = Vector2( 1241, 487 )
+
+[node name="Spawn32" type="Position2D" parent="Spawns"]
+position = Vector2( 1241, 574 )
+
+[node name="Spawn33" type="Position2D" parent="Spawns"]
+position = Vector2( 1241, 665 )
+
+[node name="Spawn34" type="Position2D" parent="Spawns"]
+position = Vector2( 1167, 665 )
+
+[node name="Spawn35" type="Position2D" parent="Spawns"]
+position = Vector2( 1064, 665 )
+
+[node name="Spawn36" type="Position2D" parent="Spawns"]
+position = Vector2( 994, 665 )
+
+[node name="Spawn37" type="Position2D" parent="Spawns"]
+position = Vector2( 931, 665 )
+
+[node name="Spawn38" type="Position2D" parent="Spawns"]
+position = Vector2( 870, 665 )
+
+[node name="Spawn39" type="Position2D" parent="Spawns"]
+position = Vector2( 810, 665 )
+
+[node name="Spawn40" type="Position2D" parent="Spawns"]
+position = Vector2( 678, 665 )
+
+[node name="Spawn41" type="Position2D" parent="Spawns"]
+position = Vector2( 621, 665 )
+
+[node name="Spawn42" type="Position2D" parent="Spawns"]
+position = Vector2( 513, 665 )
+
+[node name="Spawn43" type="Position2D" parent="Spawns"]
+position = Vector2( 422, 665 )
+
+[node name="Spawn44" type="Position2D" parent="Spawns"]
+position = Vector2( 358, 665 )
+
+[node name="Spawn45" type="Position2D" parent="Spawns"]
+position = Vector2( 256, 665 )
+
+[node name="Spawn46" type="Position2D" parent="Spawns"]
+position = Vector2( 176, 665 )
+
+[node name="Spawn47" type="Position2D" parent="Spawns"]
+position = Vector2( 71, 665 )
+
+[node name="Spawn48" type="Position2D" parent="Spawns"]
+position = Vector2( 71, 565 )
+
+[node name="Spawn49" type="Position2D" parent="Spawns"]
+position = Vector2( 71, 462 )
+
+[node name="Spawn50" type="Position2D" parent="Spawns"]
+position = Vector2( 71, 381 )
+
+[node name="Spawn51" type="Position2D" parent="Spawns"]
+position = Vector2( 71, 280 )
+
+[node name="Spawn52" type="Position2D" parent="Spawns"]
+position = Vector2( 71, 236 )
+
+[node name="Spawn53" type="Position2D" parent="Spawns"]
+position = Vector2( 71, 181 )
+
+[node name="Spawn54" type="Position2D" parent="Spawns"]
+position = Vector2( 71, 126 )
 
 [connection signal="timeout" from="Zombie_Spawn_Timer" to="." method="_on_Zombie_Spawn_Timer_timeout"]
