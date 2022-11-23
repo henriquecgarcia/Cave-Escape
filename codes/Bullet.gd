@@ -2,10 +2,11 @@ extends KinematicBody2D
 
 const DAMAGE = 50
 
-var SPEED = 750
+var SPEED = 750/2
 var velocity = Vector2()
 
 func start(pos, dir):
+	scale = Vector2(.5, .5)
 	rotation = dir
 	position = pos
 	velocity = Vector2(SPEED, 0).rotated(rotation)

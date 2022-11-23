@@ -1,15 +1,17 @@
 extends KinematicBody2D
 
 var isDead = false
+const SPEED = 200
 
 var health = 100
-var SPEED = 200
 var velocity = Vector2()
-var lastShoot = Time
+var lastShoot = Time.get_ticks_msec()
 var projectile = preload("res://codes/Bullet.tscn")
 
 var bNode
 func _ready():
+	#PlayerStats.connect("no_health", self, "queue_free")
+	scale = Vector2(0.5, 0.5)
 	var kids = get_parent().get_children()
 	for kid in kids:
 		if kid.get_name() == "Bullets":
@@ -28,12 +30,15 @@ func get_input():
 	elif Input.is_action_pressed("ui_down"):
 		velocity.y = SPEED
 
-	if Input.is_key_pressed(KEY_SPACE):
+	if Input.is_key_pressed(KEY_SPACE) or Input.is_action_pressed("ui_mouse_click"):
 		shoot()
 
 func shoot():
 	if not bNode: # should not be happening.
 		return
+	if lastShoot + 500 >= Time.get_ticks_msec():
+		return # Only one shot per 0.5 seconds...
+	lastShoot = Time.get_ticks_msec()
 	var b = projectile.instance()
 	b.start($Gun_Default.global_position, rotation)
 	bNode.add_child(b)
@@ -51,10 +56,8 @@ func _physics_process(delta):
 func Kill():
 	isDead = true
 	print("PLAYER DIED!")
-	$Collision_Braco_D.free()
-	$Collision_Head.free()
-	$Collision_Braco_E.free()
-	$Collision_Maos.free()
+	$CollisionShape2D.free()
+	$Collision_Main.free()
 
 func IsAlive():
 	return not isDead
@@ -62,6 +65,7 @@ func IsAlive():
 func DoDamage(dmg):
 	print("[PLAYER] Damage taken:  ", dmg)
 	health -= dmg
+	#PlayerStats.health = health
 	if health <= 0:
 		print("Kill()")
 		Kill()

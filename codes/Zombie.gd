@@ -11,6 +11,7 @@ var first = true
 var player
 
 func _ready():
+	scale = Vector2(0.5, 0.5)
 	var kids = get_tree().get_root().get_child(0).get_children()
 	if not player:
 		for kid in kids:

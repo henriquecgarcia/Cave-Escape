@@ -12,8 +12,6 @@ func createZombies(amount = 1):
 	for i in amount:
 		var r = rng.randi_range(0, $Spawns.get_child_count())
 		var pPos = $Spawns.get_child(r).position
-		#print(r, pPos)
-		#var pPos = Vector2(20, 20)
 		var b = zCode.instance()
 		b.position = pPos
 		Zombies.add_child(b)
