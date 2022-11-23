@@ -35,7 +35,7 @@ func shoot():
 	if not bNode: # should not be happening.
 		return
 	var b = projectile.instance()
-	b.start($Gun.global_position, rotation)
+	b.start($Gun_Default.global_position, rotation)
 	bNode.add_child(b)
 
 func _physics_process(delta):
