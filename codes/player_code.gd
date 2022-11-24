@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var isDead = false
 const SPEED = 200
+var paused = false
 
 var health = 100
 var velocity = Vector2()
@@ -10,7 +11,7 @@ var projectile = preload("res://codes/Bullet.tscn")
 
 var bNode
 func _ready():
-	#PlayerStats.connect("no_health", self, "queue_free")
+	PlayerStats.connect("no_health", self, "Kill")
 	scale = Vector2(0.5, 0.5)
 	var kids = get_parent().get_children()
 	for kid in kids:
@@ -19,6 +20,12 @@ func _ready():
 			break
 
 func get_input():
+	if Input.is_key_pressed(KEY_ESCAPE):
+		paused = not paused
+	
+	if paused:
+		return
+
 	velocity = Vector2()
 	if Input.is_action_pressed("ui_left"):
 		velocity.x = -SPEED
@@ -47,25 +54,30 @@ func _physics_process(delta):
 	if isDead:
 		return
 	get_input()
+	if paused:
+		return
 	var dir = get_global_mouse_position()
-	# Don't move if too close to the mouse pointer.
-	rotation = global_position.angle_to_point( dir ) - PI # dir.angle_to( global_position )
 	
+	rotation = global_position.angle_to_point( dir ) - PI
 	move_and_slide(velocity, Vector2(0, -1))
 
 func Kill():
 	isDead = true
 	print("PLAYER DIED!")
-	$CollisionShape2D.free()
 	$Collision_Main.free()
+	$Hurtbox/CollisionShape2D.free()
 
 func IsAlive():
 	return not isDead
 
+func IsPoused():
+	return paused
+
 func DoDamage(dmg):
 	print("[PLAYER] Damage taken:  ", dmg)
 	health -= dmg
-	#PlayerStats.health = health
-	if health <= 0:
-		print("Kill()")
-		Kill()
+	PlayerStats.health = health
+
+
+func _on_Hurtbox_area_entered(area):
+	DoDamage(1)

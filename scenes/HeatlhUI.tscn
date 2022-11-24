@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://image/ui/HeartUI.png" type="Texture" id=1]
+[ext_resource path="res://image/ui/HeartUIFull.png" type="Texture" id=1]
 [ext_resource path="res://image/ui/HeartUIEmpty.png" type="Texture" id=2]
-[ext_resource path="res://HeatlhUI.gd" type="Script" id=3]
+[ext_resource path="res://codes/HeatlhUI.gd" type="Script" id=3]
 
 [node name="HeatlhUI" type="Control"]
 margin_right = 60.0

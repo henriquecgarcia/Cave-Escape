@@ -12,12 +12,6 @@ var player
 
 func _ready():
 	scale = Vector2(0.5, 0.5)
-	var kids = get_tree().get_root().get_child(0).get_children()
-	if not player:
-		for kid in kids:
-			if kid.get_name() == "Player":
-				player = kid
-				break
 
 func _physics_process(delta):
 	if isDead:
@@ -30,6 +24,10 @@ func _physics_process(delta):
 		return
 	if not player.IsAlive():
 		return
+	
+	if player.IsPoused():
+		return
+
 	var plpos = player.get_position()
 	
 	var ang = global_position.angle_to_point( plpos ) - PI
@@ -37,10 +35,7 @@ func _physics_process(delta):
 	velocity.y = SPEED*sin(ang)
 	
 	set_rotation(ang)
-	# We don't need to multiply velocity by delta because "move_and_slide" already takes delta time into account.
-
-	# The second parameter of "move_and_slide" is the normal pointing up.
-	# In the case of a 2D platformer, in Godot, upward is negative y, which translates to -1 as a normal.
+	
 	var collision = move_and_collide(velocity)
 	if collision:
 		if collision.collider.has_method("DoDamage"):
@@ -49,6 +44,7 @@ func _physics_process(delta):
 
 func Kill():
 	$Collision.free()
+	$Hurtbox.free()
 	isDead = true
 	$Timer.start(1)
 
@@ -66,3 +62,7 @@ func _on_Timer_timeout():
 		queue_free()
 	first = false
 	$Timer.start(3)
+
+
+func _on_VisionArea_area_entered(area):
+	player = area.get_parent()

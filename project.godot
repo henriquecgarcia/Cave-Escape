@@ -14,10 +14,14 @@ config/name="Jogo Zumbi Vs Player"
 run/main_scene="res://scenes/Zombiland.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PlayerStats="*res://scenes/PlayerStats.tscn"
+
 [display]
 
-window/size/width=320
-window/size/height=180
+window/size/width=640
+window/size/height=360
 window/size/test_width=1280
 window/size/test_height=720
 window/stretch/mode="2d"
@@ -62,6 +66,11 @@ ui_mouse_click={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_render/layer_1="Player"
+2d_render/layer_2="Bullets"
 
 [physics]
 
