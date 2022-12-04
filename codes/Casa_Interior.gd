@@ -44,8 +44,3 @@ func _ready():
 func GetAliveZombies():
 	return Zombies.get_child_count()
 
-func _on_Zombie_Spawn_Timer_timeout():
-	if not Player.IsAlive():
-		return
-	createZombies(1)
-	timer.start(2)

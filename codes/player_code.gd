@@ -11,6 +11,7 @@ var projectile = preload("res://codes/Bullet.tscn")
 
 var bNode
 func _ready():
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("no_health", self, "Kill")
 	scale = Vector2(0.5, 0.5)
 	var kids = get_parent().get_children()
@@ -50,6 +51,7 @@ func shoot():
 	b.start($Gun_Default.global_position, rotation)
 	bNode.add_child(b)
 
+# warning-ignore:unused_argument
 func _physics_process(delta):
 	if isDead:
 		return
@@ -59,6 +61,7 @@ func _physics_process(delta):
 	var dir = get_global_mouse_position()
 	
 	rotation = global_position.angle_to_point( dir ) - PI
+# warning-ignore:return_value_discarded
 	move_and_slide(velocity, Vector2(0, -1))
 
 func Kill():
@@ -79,5 +82,6 @@ func DoDamage(dmg):
 	PlayerStats.health = health
 
 
+# warning-ignore:unused_argument
 func _on_Hurtbox_area_entered(area):
 	DoDamage(1)

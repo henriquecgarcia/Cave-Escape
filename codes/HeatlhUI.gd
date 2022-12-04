@@ -18,4 +18,5 @@ func set_max_hearts(value):
 func _ready():
 	self.max_hearts = PlayerStats.max_health
 	self.hearts = PlayerStats.health
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("health_changed", self, "set_hearts")

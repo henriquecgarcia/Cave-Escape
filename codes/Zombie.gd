@@ -13,6 +13,7 @@ var player
 func _ready():
 	scale = Vector2(0.5, 0.5)
 
+# warning-ignore:unused_argument
 func _physics_process(delta):
 	if isDead:
 		if first:
