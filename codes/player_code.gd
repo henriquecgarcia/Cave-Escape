@@ -2,7 +2,8 @@ extends KinematicBody2D
 
 var isDead = false
 const SPEED = 200
-var paused = false
+
+signal PlayerDie
 
 var health = 100
 var velocity = Vector2()
@@ -21,10 +22,7 @@ func _ready():
 			break
 
 func get_input():
-	if Input.is_key_pressed(KEY_ESCAPE):
-		paused = not paused
-	
-	if paused:
+	if IsPoused():
 		return
 
 	velocity = Vector2()
@@ -56,7 +54,7 @@ func _physics_process(delta):
 	if isDead:
 		return
 	get_input()
-	if paused:
+	if IsPoused():
 		return
 	var dir = get_global_mouse_position()
 	
@@ -69,12 +67,13 @@ func Kill():
 	print("PLAYER DIED!")
 	$Collision_Main.free()
 	$Hurtbox/CollisionShape2D.free()
+	emit_signal("PlayerDie")
 
 func IsAlive():
 	return not isDead
 
 func IsPoused():
-	return paused
+	return get_parent().paused or false
 
 func DoDamage(dmg):
 	print("[PLAYER] Damage taken:  ", dmg)

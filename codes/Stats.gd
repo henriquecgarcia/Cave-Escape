@@ -7,7 +7,7 @@ signal health_changed
 signal no_health
 
 func set_health(value):
-	health = value
+	health = ceil(value/4)
 	emit_signal("health_changed", health)
 	if health <= 0:
 		emit_signal("no_health")

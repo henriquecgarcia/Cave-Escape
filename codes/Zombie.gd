@@ -49,10 +49,18 @@ func Kill():
 	isDead = true
 	$Timer.start(1)
 
+func toogle_fade_timer():
+	if not isDead:
+		return
+	$Timer.paused = not $Timer.paused
+
 func IsAlive():
 	return not isDead
 
 func DoDamage(dmg):
+	if player:
+		if player.IsPoused():
+			return
 	print("[ZOMBIE] Damage taken! ", dmg)
 	health -= dmg
 	if health <= 0:

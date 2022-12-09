@@ -28,11 +28,6 @@ tile_data = PoolIntArray( -524265, 1, 196611, 262154, 3, 0, 393212, 1, 0, 393213
 
 [node name="Cliffs" parent="." instance=ExtResource( 6 )]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 467, 264 )
-current = true
-smoothing_enabled = true
-
 [node name="Bullets" type="Node2D" parent="."]
 
 [node name="Zombies" type="Node2D" parent="."]
@@ -41,9 +36,6 @@ smoothing_enabled = true
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 467, 264 )
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Camera2D")
 
 [node name="Zombie" parent="." instance=ExtResource( 5 )]
 position = Vector2( 336, 208 )

@@ -11,11 +11,11 @@ margin_right = 64.0
 margin_bottom = 15.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-max_hearts = 4
 
-[node name="CenterText" type="RichTextLabel" parent="."]
+[node name="CenterText" type="Label" parent="."]
 light_mask = 0
-margin_top = 128.0
+margin_top = 1.0
 margin_right = 640.0
-margin_bottom = 168.0
-fit_content_height = true
+margin_bottom = 362.0
+align = 1
+valign = 1

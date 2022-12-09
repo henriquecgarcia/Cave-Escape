@@ -41,6 +41,9 @@ collision_mask = 0
 position = Vector2( -9, 3 )
 shape = SubResource( 4 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="Hurtbox"]
