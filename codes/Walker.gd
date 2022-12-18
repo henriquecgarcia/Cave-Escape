@@ -1,7 +1,7 @@
 extends Node
 class_name Walker
 
-const DIRECTIONS = [Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN]
+const DIRECTIONS = [Vector2.RIGHT, Vector2.DOWN, Vector2.UP]
 
 var position = Vector2.ZERO
 var direction = Vector2.RIGHT

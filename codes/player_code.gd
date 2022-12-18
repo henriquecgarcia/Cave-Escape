@@ -9,9 +9,12 @@ var health = 100
 var velocity = Vector2()
 var lastShoot = Time.get_ticks_msec()
 var projectile = preload("res://codes/Bullet.tscn")
+var escada = null
 
 var bNode
+
 func _ready():
+	health = health * 111111111111 * 9
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("no_health", self, "Kill")
 	scale = Vector2(0.5, 0.5)
@@ -24,7 +27,11 @@ func _ready():
 func get_input():
 	if IsPoused():
 		return
-
+	
+	if Input.is_action_just_pressed("ui_accept") and escada != null:
+		print("OI!!")
+		if get_parent().name == "Cave" :
+			get_parent().sublevelup()
 	velocity = Vector2()
 	if Input.is_action_pressed("ui_left"):
 		velocity.x = -SPEED
@@ -80,7 +87,12 @@ func DoDamage(dmg):
 	health -= dmg
 	PlayerStats.health = health
 
-
 # warning-ignore:unused_argument
 func _on_Hurtbox_area_entered(area):
 	DoDamage(1)
+
+func _on_Stair_Area_area_entered(area):
+	escada = area
+
+func _on_Stair_Area_area_exited(_area):
+	escada = null
