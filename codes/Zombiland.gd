@@ -6,6 +6,7 @@ onready var rng = RandomNumberGenerator.new()
 onready var spawn = $Spawns
 onready var Player = $Player
 onready var textDisplay = $UI/CenterText
+onready var nav = $nav
 
 var spawnedZombies = 0
 var spawned = []
@@ -33,6 +34,7 @@ func createZombies(amount = 1):
 		var b = zCode.instance()
 		b.position = pPos
 		Zombies.add_child(b)
+		b.nav = nav
 		spawnedZombies += 1
 		spawned[r] = b
 

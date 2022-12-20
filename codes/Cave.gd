@@ -2,8 +2,9 @@ extends Node2D
 
 onready var rng = RandomNumberGenerator.new()
 onready var Zombies = $Zombie
-onready var walls = $Walls
+onready var walls = $Nav/Walls
 onready var textDisplay = $UI/CenterText
+onready var nav = $Nav
 
 var paused = false
 var borders = Rect2(1, 1, 999, 999)
@@ -16,19 +17,20 @@ var walker
 var pCode = preload("res://scenes/Player.tscn")
 var zCode = preload("res://scenes/Zombie.tscn")
 var eCode = preload("res://scenes/Escada.tscn")
+var Map
 
 func _ready():
 	randomize()
 
 func start(map = []):
-	walker = Walker.new(Vector2(2, 2), borders)
+	walker = Walker.new(Vector2(5, 5), borders)
 	if len(map) < 100:
 		map = walker.walk(500)
 	current_map = map.duplicate()
 	
 	var lastRoom = walker.get_end_room()
 	var stair = eCode.instance()
-	add_child_below_node(walls, stair)
+	add_child_below_node(nav, stair)
 	stair.position = lastRoom.position * 32
 	
 	if get_parent().player:
@@ -47,6 +49,7 @@ func start(map = []):
 		var zombie = zCode.instance()
 		zombie.position = room.position*32
 		Zombies.add_child(zombie)
+		zombie.nav = nav
 		if not (room.position in map) or (zombie.position in spawnedZombiesPos):
 			zombie.free()
 			continue
@@ -54,7 +57,7 @@ func start(map = []):
 	
 	walker.queue_free()
 	for p in map:
-		walls.set_cellv(p, -1)
+		walls.set_cellv(p, 1)#walls.set_cellv(p, -1)
 	walls.update_bitmask_region(borders.position, borders.end)
 
 
