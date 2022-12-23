@@ -1,21 +1,36 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scenes/HeatlhUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://codes/CenterText.gd" type="Script" id=1]
+[ext_resource path="res://scenes/UI_Health.tscn" type="PackedScene" id=2]
+[ext_resource path="res://codes/Weapon_Control.gd" type="Script" id=3]
 
 [node name="UI" type="CanvasLayer"]
 
-[node name="HeatlhUI" parent="." instance=ExtResource( 1 )]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 64.0
-margin_bottom = 15.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
+[node name="UI_Health" parent="." instance=ExtResource( 2 )]
 
 [node name="CenterText" type="Label" parent="."]
 light_mask = 0
 margin_top = 1.0
-margin_right = 640.0
-margin_bottom = 362.0
+margin_right = 320.0
+margin_bottom = 184.0
+custom_colors/font_color = Color( 0.572549, 0, 0, 1 )
+align = 1
+valign = 1
+script = ExtResource( 1 )
+
+[node name="Weapon_Control" type="Control" parent="."]
+margin_left = 256.0
+margin_right = 320.0
+margin_bottom = 16.0
+script = ExtResource( 3 )
+
+[node name="Background" type="ProgressBar" parent="Weapon_Control"]
+margin_right = 64.0
+margin_bottom = 15.0
+percent_visible = false
+
+[node name="AmmoText" type="Label" parent="Weapon_Control"]
+margin_right = 64.0
+margin_bottom = 14.0
 align = 1
 valign = 1

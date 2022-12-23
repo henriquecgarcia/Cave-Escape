@@ -1,27 +1,52 @@
 extends KinematicBody2D
 
 var isDead = false
+
 const SPEED = 200
+const DEBUG = false
+const bullets_per_weapon = {
+	"handgun": 10,
+	"rifle": 20,
+	"shotgun": 5,
+}
+
 onready var arms = $Arms_Model
 onready var feet = $Feet_Model
+onready var _shoot_pos = $Arms_Model/Gun_Default
+onready var _shoot = $Arms_Model/Gun_Default/Shoot_Sound
+onready var _hurt = $Arms_Model/Hurt
 
 signal PlayerDie
 
+var weaponsPerKills = [
+	[ "rifle", 75, Vector2.RIGHT * 9 ],
+	[ "shotgun", 75*3, Vector2.RIGHT * 0 ]
+]
+
+var zombieKilled = 0
 var health = 100
 var velocity = Vector2()
 var lastShoot = Time.get_ticks_msec()
 var projectile = preload("res://codes/Bullet.tscn")
-var watchAnimations = ["handung_reload", "handgun_shoot", "rifle_reload", "rifle_shoot"]
+var watchAnimations = ["handgun_reload", "handgun_shoot", "rifle_reload", "rifle_shoot"]
 var currentWeapon = "handgun"
 var escada = null
 var forceAnim = false
+var current_ammo = bullets_per_weapon[ currentWeapon ]
 
 var bNode
 
 func _ready():
-	health = health * 111111111111 * 9
+	if DEBUG:
+		health = health * 111111111111 * 9
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("no_health", self, "Kill")
+	PlayerStats.max_health = health
+	PlayerStats.health = health
+	
+	PlayerStats.max_ammo = current_ammo
+	PlayerStats.ammo = current_ammo
+	
 	scale = Vector2(0.75, 0.75)
 	var kids = get_parent().get_children()
 	for kid in kids:
@@ -65,8 +90,18 @@ func get_input():
 		velocity.y = -SPEED
 	elif Input.is_action_pressed("ui_down"):
 		velocity.y = SPEED
-
-	if Input.is_key_pressed(KEY_SPACE) or Input.is_action_pressed("ui_mouse_click"):
+	
+	if Input.is_key_pressed(KEY_R):
+		var sound = load("res://sounds/weapon_reload.ogg")
+		_shoot.stream = sound
+		_shoot.play()
+		
+		set_arms_animation("reload")
+		forceAnim = true
+		
+		current_ammo = bullets_per_weapon[ currentWeapon ]
+		PlayerStats.ammo = current_ammo
+	elif Input.is_key_pressed(KEY_SPACE) or Input.is_action_pressed("ui_mouse_click"):
 		shoot()
 
 func shoot():
@@ -74,18 +109,31 @@ func shoot():
 		return
 	if lastShoot + 500 >= Time.get_ticks_msec():
 		return # Only one shot per 0.5 seconds...
+	lastShoot = Time.get_ticks_msec()
+	if current_ammo <= 0:
+		var sound = load("res://sounds/weapon_no-ammo.ogg")
+		_shoot.stream = sound
+		_shoot.play()
+		return
 	set_arms_animation("shoot")
 	forceAnim = true
-	lastShoot = Time.get_ticks_msec()
 	var b = projectile.instance()
-	b.start($Gun_Default.global_position, rotation)
+	b.start(_shoot_pos.global_position, rotation, self)
 	bNode.add_child(b)
+	
+	current_ammo -= 1
+	
+	PlayerStats.ammo = current_ammo
+	
+	var sound = load("res://sounds/" + currentWeapon + "_shot.mp3")
+	if sound:
+		_shoot.stream = sound
+	_shoot.play()
 
-# warning-ignore:unused_argument
-func _physics_process(delta):
+func _physics_process(_delta):
 	if isDead:
 		return
-	if IsPoused():
+	if IsPaused():
 		return
 	
 	get_input()
@@ -93,15 +141,15 @@ func _physics_process(delta):
 	var dir = get_global_mouse_position()
 	rotation = global_position.angle_to_point( dir ) - PI
 	
-	var changed = position
-	
 	if velocity != Vector2.ZERO:
+		var changed = false
 		set_arms_animation("move")
+		
 		var rot = -(rotation_degrees + 180)
 		var rot_deg_abs = abs(rot)
-		print(rot)
 		if rot_deg_abs <= 30:
-			print("traz")
+			if DEBUG:
+				print("traz")
 			if velocity.y > 0:
 				set_feet_animation("strafe_right")
 				changed = true
@@ -109,7 +157,8 @@ func _physics_process(delta):
 				set_feet_animation("strafe_left")
 				changed = true
 		elif abs(rot_deg_abs - 180) <= 30:
-			print("Frente")
+			if DEBUG:
+				print("Frente")
 			if velocity.y > 0:
 				set_feet_animation("strafe_left")
 				changed = true
@@ -117,7 +166,8 @@ func _physics_process(delta):
 				set_feet_animation("strafe_right")
 				changed = true
 		elif abs(rot - 90) <= 30:
-			print("baixo")
+			if DEBUG:
+				print("baixo")
 			if velocity.x > 0:
 				set_feet_animation("strafe_left")
 				changed = true
@@ -125,7 +175,8 @@ func _physics_process(delta):
 				set_feet_animation("strafe_right")
 				changed = true
 		elif abs(rot_deg_abs - 90) <= 30:
-			print("cima")
+			if DEBUG:
+				print("cima")
 			if velocity.x > 0:
 				set_feet_animation("strafe_right")
 				changed = true
@@ -133,7 +184,8 @@ func _physics_process(delta):
 				set_feet_animation("strafe_left")
 				changed = true
 		elif abs(rot - 45) <= 15:
-			print("Pos 1")
+			if DEBUG:
+				print("Pos 1")
 			if velocity.x > 0 and velocity.y > 0:
 				set_feet_animation("strafe_right")
 				changed = true
@@ -141,7 +193,8 @@ func _physics_process(delta):
 				set_feet_animation("strafe_left")
 				changed = true
 		elif abs(rot - 45*3) <= 15:
-			print("pos 2")
+			if DEBUG:
+				print("pos 2")
 			if velocity.x < 0 and velocity.y > 0:
 				changed = true
 				set_feet_animation("strafe_left")
@@ -149,7 +202,8 @@ func _physics_process(delta):
 				changed = true
 				set_feet_animation("strafe_right")
 		elif abs(rot_deg_abs - 45*3) <= 15:
-			print("Pos 3")
+			if DEBUG:
+				print("Pos 3")
 			if velocity.x > 0 and velocity.y > 0:
 				changed = true
 				set_feet_animation("strafe_left")
@@ -157,26 +211,24 @@ func _physics_process(delta):
 				changed = true
 				set_feet_animation("strafe_right")
 		elif abs(rot_deg_abs - 45) <= 15:
-			print("Pos 4")
+			if DEBUG:
+				print("Pos 4")
 			if velocity.x < 0 and velocity.y > 0:
 				changed = true
 				set_feet_animation("strafe_right")
 			elif velocity.x > 0 and velocity.y < 0:
 				changed = true
 				set_feet_animation("strafe_left")
-		else:
-			set_feet_animation("move")
-
+		
 		if not changed:
-			set_feet_animation("move")
+			set_feet_animation("run")
 	else:
 		set_arms_animation()
 		set_feet_animation()
 	
 	velocity = velocity.normalized() * SPEED
 	
-# warning-ignore:return_value_discarded
-	move_and_slide(velocity, Vector2(0, -1))
+	var _ms = move_and_slide(velocity, Vector2(0, -1))
 
 func Kill():
 	isDead = true
@@ -188,7 +240,12 @@ func Kill():
 func IsAlive():
 	return not isDead
 
-func IsPoused():
+func toogle_anim():
+	_hurt.stream_paused = IsPaused()
+	arms.stop()
+	feet.stop()
+
+func IsPaused():
 	if get_parent().paused:
 		return get_parent().paused or false
 	return false
@@ -197,9 +254,33 @@ func DoDamage(dmg):
 	print("[PLAYER] Damage taken:  ", dmg)
 	health -= dmg
 	PlayerStats.health = health
+	if _hurt.is_playing():
+		_hurt.stop()
+	var num = randi() % 8 + 1
+	var res = load("res://sounds/PlayerPain/" + str(num) + ".mp3")
+	if not res:
+		return
+	_hurt.stream = res
+	_hurt.play()
 
-# warning-ignore:unused_argument
-func _on_Hurtbox_area_entered(area):
+func CheckWeaponChange():
+	if len(weaponsPerKills) < 1:
+		return
+	var next = weaponsPerKills.front()
+	if zombieKilled >= next[1]:
+		currentWeapon = next[0]
+		zombieKilled = 0
+		weaponsPerKills.pop_front()
+		current_ammo = bullets_per_weapon[ currentWeapon ]
+		PlayerStats.max_ammo = current_ammo
+		PlayerStats.ammo = current_ammo
+		arms.position += next[2]
+
+func KilledZombie():
+	zombieKilled += 1
+	CheckWeaponChange()
+
+func _on_Hurtbox_area_entered(_area):
 	DoDamage(1)
 
 func _on_Stair_Area_area_entered(area):

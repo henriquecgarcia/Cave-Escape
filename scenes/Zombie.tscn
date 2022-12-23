@@ -1,5 +1,6 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=53 format=2]
 
+[ext_resource path="res://sounds/zombie.mp3" type="AudioStream" id=1]
 [ext_resource path="res://codes/Zombie.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/VisionArea.tscn" type="PackedScene" id=4]
@@ -46,6 +47,7 @@
 [ext_resource path="res://models/Zumbi/attack/skeleton-attack_2.png" type="Texture" id=45]
 [ext_resource path="res://models/Zumbi/move/skeleton-move_7.png" type="Texture" id=46]
 [ext_resource path="res://models/Zumbi/move/skeleton-move_0.png" type="Texture" id=47]
+[ext_resource path="res://sounds/zombie_pain.wav" type="AudioStream" id=48]
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -77,21 +79,31 @@ radius = 320.0
 [node name="Zombie" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Zombie_Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+volume_db = -10.0
+
 [node name="Model" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 4 )
 animation = "idle"
-frame = 8
+frame = 4
 playing = true
 
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Model"]
+stream = ExtResource( 48 )
+area_mask = 2
+
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 light_mask = 3
 position = Vector2( 0, 1 )
 shape = SubResource( 5 )
 
-[node name="Timer" type="Timer" parent="."]
-
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 24, 0 )
 collision_layer = 3
 collision_mask = 3
@@ -101,18 +113,33 @@ position = Vector2( -23.5, 0 )
 shape = SubResource( 6 )
 
 [node name="VisionArea" parent="." instance=ExtResource( 4 )]
+visible = false
 
 [node name="CollisionShape2D" parent="VisionArea" index="0"]
 shape = SubResource( 3 )
-
-[node name="Node2D" type="Node2D" parent="."]
 
 [node name="Recalculate_Route" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
 
-[connection signal="animation_finished" from="Model" to="." method="_on_Model_animation_finished"]
+[node name="HealthBar" type="ProgressBar" parent="."]
+margin_left = -34.0
+margin_top = -39.0
+margin_right = 24.0
+margin_bottom = -25.0
+rounded = true
+percent_visible = false
+
+[node name="Count" type="Label" parent="HealthBar"]
+margin_right = 57.0
+margin_bottom = 14.0
+text = "100/100"
+align = 1
+valign = 1
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="animation_finished" from="Model" to="." method="_on_Model_animation_finished"]
+[connection signal="finished" from="Model/Hurt" to="." method="_on_Hurt_finished"]
 [connection signal="area_entered" from="VisionArea" to="." method="_on_VisionArea_area_entered"]
 [connection signal="timeout" from="Recalculate_Route" to="." method="_on_Recalculate_Route_timeout"]
 

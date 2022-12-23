@@ -1,5 +1,6 @@
-[gd_scene load_steps=211 format=2]
+[gd_scene load_steps=275 format=2]
 
+[ext_resource path="res://sounds/handgun_shot.mp3" type="AudioStream" id=1]
 [ext_resource path="res://codes/player_code.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://models/Player/handgun/move/survivor-move_handgun_6.png" type="Texture" id=4]
@@ -204,6 +205,69 @@
 [ext_resource path="res://models/Player/handgun/shoot/survivor-shoot_handgun_0.png" type="Texture" id=203]
 [ext_resource path="res://models/Player/feet/strafe_right/survivor-strafe_right_0.png" type="Texture" id=204]
 [ext_resource path="res://models/Player/rifle/reload/survivor-reload_rifle_0.png" type="Texture" id=205]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_12.png" type="Texture" id=206]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_10.png" type="Texture" id=207]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_17.png" type="Texture" id=208]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_3.png" type="Texture" id=209]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_5.png" type="Texture" id=210]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_6.png" type="Texture" id=211]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_9.png" type="Texture" id=212]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_8.png" type="Texture" id=213]
+[ext_resource path="res://models/Player/shotgun/shoot/survivor-shoot_shotgun_2.png" type="Texture" id=214]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_19.png" type="Texture" id=215]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_3.png" type="Texture" id=216]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_2.png" type="Texture" id=217]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_10.png" type="Texture" id=218]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_5.png" type="Texture" id=219]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_9.png" type="Texture" id=220]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_2.png" type="Texture" id=221]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_5.png" type="Texture" id=222]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_16.png" type="Texture" id=223]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_7.png" type="Texture" id=224]
+[ext_resource path="res://models/Player/shotgun/shoot/survivor-shoot_shotgun_1.png" type="Texture" id=225]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_13.png" type="Texture" id=226]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_15.png" type="Texture" id=227]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_7.png" type="Texture" id=228]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_0.png" type="Texture" id=229]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_11.png" type="Texture" id=230]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_8.png" type="Texture" id=231]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_4.png" type="Texture" id=232]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_1.png" type="Texture" id=233]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_15.png" type="Texture" id=234]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_1.png" type="Texture" id=235]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_8.png" type="Texture" id=236]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_18.png" type="Texture" id=237]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_9.png" type="Texture" id=238]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_6.png" type="Texture" id=239]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_6.png" type="Texture" id=240]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_18.png" type="Texture" id=241]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_7.png" type="Texture" id=242]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_4.png" type="Texture" id=243]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_19.png" type="Texture" id=244]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_14.png" type="Texture" id=245]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_10.png" type="Texture" id=246]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_16.png" type="Texture" id=247]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_12.png" type="Texture" id=248]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_14.png" type="Texture" id=249]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_18.png" type="Texture" id=250]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_11.png" type="Texture" id=251]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_4.png" type="Texture" id=252]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_17.png" type="Texture" id=253]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_17.png" type="Texture" id=254]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_12.png" type="Texture" id=255]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_13.png" type="Texture" id=256]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_15.png" type="Texture" id=257]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_14.png" type="Texture" id=258]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_16.png" type="Texture" id=259]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_19.png" type="Texture" id=260]
+[ext_resource path="res://models/Player/shotgun/idle/survivor-idle_shotgun_13.png" type="Texture" id=261]
+[ext_resource path="res://models/Player/shotgun/move/survivor-move_shotgun_0.png" type="Texture" id=262]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_11.png" type="Texture" id=263]
+[ext_resource path="res://models/Player/shotgun/shoot/survivor-shoot_shotgun_0.png" type="Texture" id=264]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_2.png" type="Texture" id=265]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_1.png" type="Texture" id=266]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_0.png" type="Texture" id=267]
+[ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_3.png" type="Texture" id=268]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 17.0
@@ -261,7 +325,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 133 ), ExtResource( 53 ), ExtResource( 22 ), ExtResource( 36 ), ExtResource( 94 ), ExtResource( 43 ), ExtResource( 141 ), ExtResource( 136 ), ExtResource( 27 ), ExtResource( 158 ), ExtResource( 160 ), ExtResource( 167 ), ExtResource( 168 ), ExtResource( 169 ), ExtResource( 170 ), ExtResource( 171 ), ExtResource( 163 ), ExtResource( 164 ), ExtResource( 165 ), ExtResource( 166 ) ],
 "loop": true,
-"name": "reifle_idle",
+"name": "rifle_idle",
 "speed": 20.0
 }, {
 "frames": [ ExtResource( 205 ), ExtResource( 172 ), ExtResource( 194 ), ExtResource( 61 ), ExtResource( 159 ), ExtResource( 162 ), ExtResource( 195 ), ExtResource( 192 ), ExtResource( 191 ), ExtResource( 190 ), ExtResource( 196 ), ExtResource( 185 ), ExtResource( 184 ), ExtResource( 189 ), ExtResource( 197 ), ExtResource( 198 ), ExtResource( 201 ), ExtResource( 200 ), ExtResource( 199 ), ExtResource( 202 ) ],
@@ -277,6 +341,26 @@ animations = [ {
 "frames": [ ExtResource( 193 ), ExtResource( 188 ), ExtResource( 132 ) ],
 "loop": false,
 "name": "rifle_shoot",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 229 ), ExtResource( 233 ), ExtResource( 217 ), ExtResource( 209 ), ExtResource( 232 ), ExtResource( 210 ), ExtResource( 211 ), ExtResource( 224 ), ExtResource( 236 ), ExtResource( 212 ), ExtResource( 218 ), ExtResource( 230 ), ExtResource( 248 ), ExtResource( 261 ), ExtResource( 249 ), ExtResource( 234 ), ExtResource( 247 ), ExtResource( 254 ), ExtResource( 241 ), ExtResource( 215 ) ],
+"loop": true,
+"name": "shotgun_idle",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 262 ), ExtResource( 235 ), ExtResource( 221 ), ExtResource( 216 ), ExtResource( 243 ), ExtResource( 222 ), ExtResource( 240 ), ExtResource( 228 ), ExtResource( 213 ), ExtResource( 220 ), ExtResource( 246 ), ExtResource( 251 ), ExtResource( 206 ), ExtResource( 256 ), ExtResource( 258 ), ExtResource( 227 ), ExtResource( 223 ), ExtResource( 253 ), ExtResource( 250 ), ExtResource( 260 ) ],
+"loop": true,
+"name": "shotgun_move",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 267 ), ExtResource( 266 ), ExtResource( 265 ), ExtResource( 268 ), ExtResource( 252 ), ExtResource( 219 ), ExtResource( 239 ), ExtResource( 242 ), ExtResource( 231 ), ExtResource( 238 ), ExtResource( 207 ), ExtResource( 263 ), ExtResource( 255 ), ExtResource( 226 ), ExtResource( 245 ), ExtResource( 257 ), ExtResource( 259 ), ExtResource( 208 ), ExtResource( 237 ), ExtResource( 244 ) ],
+"loop": false,
+"name": "shotgun_reload",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 264 ), ExtResource( 225 ), ExtResource( 214 ) ],
+"loop": false,
+"name": "shotgun_shoot",
 "speed": 12.0
 } ]
 
@@ -307,11 +391,26 @@ playing = true
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 7 )
 animation = "handgun_idle"
-frame = 3
+frame = 13
 playing = true
 
-[node name="Gun_Default" type="Position2D" parent="."]
-position = Vector2( 23, 11 )
+[node name="Gun_Default" type="Position2D" parent="Arms_Model"]
+position = Vector2( 115, 55 )
+scale = Vector2( 5, 5 )
+
+[node name="Shoot_Sound" type="AudioStreamPlayer2D" parent="Arms_Model/Gun_Default"]
+light_mask = 4
+stream = ExtResource( 1 )
+area_mask = 4
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Arms_Model"]
+scale = Vector2( 5, 5 )
+area_mask = 2
+
+[node name="Ears" type="Listener2D" parent="Arms_Model"]
+light_mask = 7
+scale = Vector2( 5, 5 )
+current = true
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 3

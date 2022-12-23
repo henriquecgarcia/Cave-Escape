@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/3.mp3-2d74a48b75961eeee5e5dd69d7068bc3.mp3str"
+
+[deps]
+
+source_file="res://sounds/PlayerPain/3.mp3"
+dest_files=[ "res://.import/3.mp3-2d74a48b75961eeee5e5dd69d7068bc3.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
