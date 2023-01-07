@@ -1,27 +1,80 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://codes/PauseMenu.gd" type="Script" id=2]
+[ext_resource path="res://image/menu/resume_pressed.png" type="Texture" id=3]
+[ext_resource path="res://image/menu/resume.png" type="Texture" id=4]
+[ext_resource path="res://image/menu/quit.png" type="Texture" id=5]
+[ext_resource path="res://image/menu/quit_pressed.png" type="Texture" id=6]
+[ext_resource path="res://image/menu/music.png" type="Texture" id=7]
+[ext_resource path="res://image/menu/som_pressed.png" type="Texture" id=8]
+[ext_resource path="res://image/menu/som.png" type="Texture" id=9]
+[ext_resource path="res://image/menu/musica_pressed.png" type="Texture" id=10]
+[ext_resource path="res://image/menu/home_pressed.png" type="Texture" id=11]
 
 [node name="PauseMenu" type="Control"]
 pause_mode = 2
-margin_left = 96.0
-margin_top = 48.0
-margin_right = 224.0
-margin_bottom = 144.0
+margin_right = 600.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
-[node name="Button" type="Button" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 121.0
-margin_bottom = 89.0
-text = "Reiniciar"
-flat = true
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 600.0
+color = Color( 0.172549, 0.172549, 0.172549, 1 )
 
-[node name="TextureButton" type="TextureButton" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 121.0
-margin_bottom = 89.0
+[node name="Center" type="GridContainer" parent="."]
+margin_left = 97.0
+margin_top = 47.0
+margin_right = 697.0
+margin_bottom = 451.0
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="Resume" type="TextureButton" parent="Center"]
+margin_right = 602.0
+margin_bottom = 200.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+
+[node name="Quit" type="TextureButton" parent="Center"]
+margin_top = 204.0
+margin_right = 602.0
+margin_bottom = 404.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+
+[node name="GridContainer" type="GridContainer" parent="Center"]
+margin_top = 408.0
+margin_right = 602.0
+margin_bottom = 608.0
+custom_constants/hseparation = 45
+columns = 5
+
+[node name="Home" type="TextureButton" parent="Center/GridContainer"]
+margin_right = 112.0
+margin_bottom = 200.0
+texture_pressed = ExtResource( 11 )
+
+[node name="Som" type="TextureButton" parent="Center/GridContainer"]
+margin_left = 157.0
+margin_right = 357.0
+margin_bottom = 200.0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 8 )
+
+[node name="Musica" type="TextureButton" parent="Center/GridContainer"]
+margin_left = 402.0
+margin_right = 602.0
+margin_bottom = 200.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 10 )
+
+[connection signal="button_down" from="Center/Resume" to="." method="_on_Resume_button_down"]
+[connection signal="button_up" from="Center/Resume" to="." method="_on_Resume_button_up"]
+[connection signal="button_down" from="Center/Quit" to="." method="_on_Quit_button_down"]
+[connection signal="button_up" from="Center/Quit" to="." method="_on_Quit_button_up"]
+[connection signal="button_down" from="Center/GridContainer/Home" to="." method="_on_Home_button_down"]
+[connection signal="button_up" from="Center/GridContainer/Home" to="." method="_on_Home_button_up"]
+[connection signal="button_down" from="Center/GridContainer/Som" to="." method="_on_Som_button_down"]
+[connection signal="button_up" from="Center/GridContainer/Som" to="." method="_on_Som_button_up"]
+[connection signal="button_down" from="Center/GridContainer/Musica" to="." method="_on_Musica_button_down"]
+[connection signal="button_up" from="Center/GridContainer/Musica" to="." method="_on_Musica_button_up"]

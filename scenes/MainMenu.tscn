@@ -11,6 +11,8 @@
 [ext_resource path="res://codes/MainMenu.gd" type="Script" id=9]
 
 [node name="Menu" type="Control"]
+pause_mode = 2
+physics_interpolation_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 9 )
