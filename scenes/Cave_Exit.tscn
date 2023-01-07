@@ -5,6 +5,7 @@
 [node name="Cave_Exit" type="Area2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.16, 0.16 )
 
 [node name="Exit_Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

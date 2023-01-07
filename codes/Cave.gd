@@ -24,7 +24,7 @@ func _ready():
 
 func start(map = []):
 	walker = Walker.new(Vector2(5, 5), borders)
-	if len(map) < 100:
+	if len(map) < 50:
 		map = walker.walk(500)
 	current_map = map.duplicate()
 	
@@ -41,6 +41,7 @@ func start(map = []):
 		player = $Player
 	
 	player.position = map.front()*32
+	player.connect("PlayerDie", self, "playerDieText")
 	
 	var spawnedZombiesPos = []
 	for room in walker.rooms:
@@ -56,14 +57,17 @@ func start(map = []):
 			var p = top_left_corner + Vector2( randi() % int(size.x), randi() % int(size.y) )
 			if position.distance_to(p * 32) < 300:
 				continue
+			
 			var zombie = zCode.instance()
 			zombie.position = p * 32 + Vector2(16, 16)
 			Zombies.add_child(zombie)
 			zombie.nav = nav
 			zombie.connect("ZombieDie", self, "ZombieKilled")
+			
 			if not (room.position in map) or (zombie.position in spawnedZombiesPos):
 				zombie.free()
 				continue
+			
 			spawnedZombiesPos.append(zombie.position)
 			rzc += 1
 	
@@ -84,8 +88,10 @@ func GetAliveZombies():
 func _input(event):
 	if not player.IsAlive():
 		return
+	
 	if event.is_action_pressed("ui_esc"):
 		paused = not paused
+	
 	if paused:
 		change_center_text()
 		pause_all_timers()
@@ -105,6 +111,7 @@ func pause_all_timers():
 func pause_anims():
 	for zTime in Zombies.get_children():
 		zTime.toogle_anim()
+	
 	player.toogle_anim()
 
 func change_center_text(new_text = "Game Paused", color = Vector3(1, 1, 1), color_a = 1):

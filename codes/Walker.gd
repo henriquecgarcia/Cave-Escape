@@ -18,6 +18,7 @@ func _init(starting_position, new_borders):
 
 func walk(steps):
 	place_room(position)
+	
 	for step in steps:
 		if steps_since_turn >= 6 and randf() <= 0.3:
 			change_direction()
@@ -26,6 +27,7 @@ func walk(steps):
 			step_history.append(position)
 		else:
 			change_direction()
+	
 	return step_history
 
 func step():
@@ -40,10 +42,12 @@ func step():
 func change_direction():
 	place_room(position)
 	steps_since_turn = 0
+	
 	var directions = DIRECTIONS.duplicate()
 	directions.erase(direction)
 	directions.shuffle()
 	direction = directions.pop_front()
+	
 	while not borders.has_point(position + direction):
 		direction = directions.pop_front()
 
@@ -54,6 +58,7 @@ func place_room(pos):
 	var size = Vector2(randi() % 4 + 3, randi() % 4 + 3)
 	var top_left_corner = (pos - size/2).ceil()
 	rooms.append(create_room(pos, size))
+	
 	for y in size.y:
 		for x in size.x:
 			var new_step = top_left_corner + Vector2(x, y)
@@ -63,7 +68,9 @@ func place_room(pos):
 func get_end_room():
 	var end_room = rooms.pop_front()
 	var starting_position = step_history.front()
+	
 	for room in rooms:
 		if starting_position.distance_to(room.position) > starting_position.distance_to(end_room.position):
 			end_room = room
+	
 	return end_room

@@ -1,4 +1,4 @@
-[gd_scene load_steps=275 format=2]
+[gd_scene load_steps=277 format=2]
 
 [ext_resource path="res://sounds/handgun_shot.mp3" type="AudioStream" id=1]
 [ext_resource path="res://codes/player_code.gd" type="Script" id=2]
@@ -268,6 +268,7 @@
 [ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_1.png" type="Texture" id=266]
 [ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_0.png" type="Texture" id=267]
 [ext_resource path="res://models/Player/shotgun/reload/survivor-reload_shotgun_3.png" type="Texture" id=268]
+[ext_resource path="res://sounds/CaveBG/3.mp3" type="AudioStream" id=269]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 17.0
@@ -370,6 +371,9 @@ radius = 18.0
 [sub_resource type="CircleShape2D" id=4]
 radius = 7.0
 
+[sub_resource type="CircleShape2D" id=9]
+radius = 20.0
+
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 4, 12.5 )
 
@@ -377,6 +381,7 @@ extents = Vector2( 4, 12.5 )
 script = ExtResource( 2 )
 
 [node name="Collision_Main" type="CollisionShape2D" parent="."]
+visible = false
 light_mask = 3
 position = Vector2( -1, 3 )
 shape = SubResource( 1 )
@@ -391,7 +396,7 @@ playing = true
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 7 )
 animation = "handgun_idle"
-frame = 13
+frame = 12
 playing = true
 
 [node name="Gun_Default" type="Position2D" parent="Arms_Model"]
@@ -430,6 +435,14 @@ shape = SubResource( 4 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
+[node name="ItenPickup" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="PickupCollision" type="CollisionShape2D" parent="ItenPickup"]
+position = Vector2( 1, 0 )
+shape = SubResource( 9 )
+
 [node name="Stair_Area" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 16
@@ -441,9 +454,12 @@ shape = SubResource( 5 )
 
 [node name="Bullets" type="Node2D" parent="."]
 
+[node name="PlayerBG" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 269 )
+
 [connection signal="animation_finished" from="Arms_Model" to="." method="_on_Arms_Model_animation_finished"]
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_entered" from="Stair_Area" to="." method="_on_Stair_Area_area_entered"]
 [connection signal="area_exited" from="Stair_Area" to="." method="_on_Stair_Area_area_exited"]
+[connection signal="finished" from="PlayerBG" to="." method="_on_PlayerBG_finished"]
 
 [editable path="Hurtbox"]

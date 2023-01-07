@@ -8,6 +8,8 @@ script = ExtResource( 2 )
 
 [node name="Hold" type="Node2D" parent="."]
 
+[node name="Drops" type="Node2D" parent="."]
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
 [node name="Bullets" type="Node2D" parent="."]

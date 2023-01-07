@@ -4,10 +4,10 @@ var isDead = false
 
 const SPEED = 200
 const DEBUG = false
-const bullets_per_weapon = {
-	"handgun": 10,
-	"rifle": 20,
-	"shotgun": 5,
+const weapons = {
+	"handgun": {"ammo": 10, "damage": 25, "mags": 20},
+	"rifle": {"ammo": 20, "damage": 50, "mags": 10},
+	"shotgun": {"ammo": 5, "damage": 60, "mags": 10},
 }
 
 onready var arms = $Arms_Model
@@ -15,6 +15,7 @@ onready var feet = $Feet_Model
 onready var _shoot_pos = $Arms_Model/Gun_Default
 onready var _shoot = $Arms_Model/Gun_Default/Shoot_Sound
 onready var _hurt = $Arms_Model/Hurt
+onready var _bg_sound = $PlayerBG
 
 signal PlayerDie
 
@@ -32,14 +33,20 @@ var watchAnimations = ["handgun_reload", "handgun_shoot", "rifle_reload", "rifle
 var currentWeapon = "handgun"
 var escada = null
 var forceAnim = false
-var current_ammo = bullets_per_weapon[ currentWeapon ]
+var current_ammo = weapons[ currentWeapon ].ammo
+
+var bg_sounds = []
+var cur_sounds = bg_sounds
+var cur_sound = -1
 
 var bNode
 
 func _ready():
+	randomize()
 	if DEBUG:
 		health = health * 111111111111 * 9
-# warning-ignore:return_value_discarded
+	
+	# warning-ignore:return_value_discarded
 	PlayerStats.connect("no_health", self, "Kill")
 	PlayerStats.max_health = health
 	PlayerStats.health = health
@@ -47,12 +54,33 @@ func _ready():
 	PlayerStats.max_ammo = current_ammo
 	PlayerStats.ammo = current_ammo
 	
-	scale = Vector2(0.75, 0.75)
-	var kids = get_parent().get_children()
-	for kid in kids:
-		if kid.get_name() == "Bullets":
-			bNode = kid
+	for k in weapons.keys():
+		var i = weapons[k]
+		PlayerStats.add_weapon(k, i.ammo, i.mags, i.damage)
+	
+	var dir = Directory.new()
+	dir.open("res://sounds/CaveBG/")
+	dir.list_dir_begin()
+	var file_name
+	while true:
+		file_name = dir.get_next()
+		if file_name == "":
 			break
+		elif dir.current_is_dir():
+			continue
+		elif not file_name.ends_with(".mp3"):
+			continue
+		bg_sounds.append( load("res://sounds/CaveBG/" + file_name) )
+	
+	cur_sounds = bg_sounds.duplicate()
+	cur_sounds.shuffle()
+	_bg_sound.stream = cur_sounds.pop_front()
+	_bg_sound.play()
+	
+	scale = Vector2(0.75, 0.75)
+	
+	bNode = get_parent().get_node("Bullets")
+	
 	set_arms_animation()
 	set_feet_animation()
 
@@ -99,7 +127,7 @@ func get_input():
 		set_arms_animation("reload")
 		forceAnim = true
 		
-		current_ammo = bullets_per_weapon[ currentWeapon ]
+		current_ammo = weapons[ currentWeapon ].ammo
 		PlayerStats.ammo = current_ammo
 	elif Input.is_key_pressed(KEY_SPACE) or Input.is_action_pressed("ui_mouse_click"):
 		shoot()
@@ -118,7 +146,7 @@ func shoot():
 	set_arms_animation("shoot")
 	forceAnim = true
 	var b = projectile.instance()
-	b.start(_shoot_pos.global_position, rotation, self)
+	b.start(_shoot_pos.global_position, rotation, self, weapons[ currentWeapon ].damage)
 	bNode.add_child(b)
 	
 	current_ammo -= 1
@@ -246,16 +274,16 @@ func toogle_anim():
 	feet.stop()
 
 func IsPaused():
-	if get_parent().paused:
-		return get_parent().paused or false
-	return false
+	return get_tree().paused
 
-func DoDamage(dmg):
+func DoDamage(dmg, _actor):
 	print("[PLAYER] Damage taken:  ", dmg)
 	health -= dmg
 	PlayerStats.health = health
 	if _hurt.is_playing():
 		_hurt.stop()
+	if Settings.Sounds == false:
+		return
 	var num = randi() % 8 + 1
 	var res = load("res://sounds/PlayerPain/" + str(num) + ".mp3")
 	if not res:
@@ -271,17 +299,15 @@ func CheckWeaponChange():
 		currentWeapon = next[0]
 		zombieKilled = 0
 		weaponsPerKills.pop_front()
-		current_ammo = bullets_per_weapon[ currentWeapon ]
+		current_ammo = weapons[ currentWeapon ].ammo
 		PlayerStats.max_ammo = current_ammo
 		PlayerStats.ammo = current_ammo
 		arms.position += next[2]
 
 func KilledZombie():
 	zombieKilled += 1
+	PlayerStats.kills += 1
 	CheckWeaponChange()
-
-func _on_Hurtbox_area_entered(_area):
-	DoDamage(1)
 
 func _on_Stair_Area_area_entered(area):
 	escada = area
@@ -289,9 +315,17 @@ func _on_Stair_Area_area_entered(area):
 func _on_Stair_Area_area_exited(_area):
 	escada = null
 
-
 func _on_Arms_Model_animation_finished():
 	if not arms.animation in watchAnimations:
 		return
 	forceAnim = false
 	set_arms_animation()
+
+func _on_PlayerBG_finished():
+	if Settings.Background == false:
+		return
+	if cur_sounds.size() == 0:
+		cur_sounds = bg_sounds.duplicate()
+	cur_sounds.shuffle()
+	_bg_sound.stream = cur_sounds.pop_front()
+	_bg_sound.play()

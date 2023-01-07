@@ -3,12 +3,14 @@ extends KinematicBody2D
 signal ZombieDie
 
 const SPEED = 40
-const DAMAGE = 1
+const DAMAGE = 10
 
 onready var _sound = $Zombie_Sound
 onready var _pain = $Model/Hurt
 onready var health_bar = $HealthBar
 onready var hpcount = $HealthBar/Count
+
+const drop = preload("res://scenes/ItemDrop.tscn")
 
 var blood
 
@@ -27,6 +29,8 @@ var player
 var collider
 
 func _ready():
+	# warning-ignore:return_value_discarded
+	Settings.connect("sound_stats_changed", self, "set_sound_stats")
 	scale = Vector2(0.5, 0.5)
 	$Model.animation = "idle"
 	
@@ -43,6 +47,13 @@ func _ready():
 	
 	health_bar.max_value = health
 	health_bar.value = health
+
+func set_sound_stats(stats):
+	if player:
+		if stats:
+			_sound.play()
+		else:
+			_sound.stop()
 
 func set_nav(new_nav):
 	nav = new_nav
@@ -101,18 +112,21 @@ func _physics_process(delta):
 	if change_anim:
 		$Model.animation = "move"
 	
-	var collision = move_and_collide(velocity)
-	if collision:
-		if collision.collider.has_method("DoDamage"):
-			if change_anim:
-				$Model.animation = "attack"
-				change_anim = false
-				collider = collision.collider
-	else:
-		collider = null
+	var _ms = move_and_slide(velocity)
+	
 
 
 func Kill():
+	if player:
+		var item = drop.instance()
+		
+		player.get_parent().add_child_below_node(player.get_parent().get_node("Drops"), item)
+		if not item.Deploy(player, self):
+			print("Item removido")
+			item.queue_free()
+		else:
+			print("Item spawnado")
+	
 	var bloodStain = Sprite.new()
 	add_child_below_node($Timer, bloodStain)
 	
@@ -128,13 +142,16 @@ func Kill():
 	$Model.playing = false
 	
 	_sound.stop()
+	if Settings.Sounds:
+		_sound.stream = load("res://sounds/zombie_death.wav")
+		_sound.play()
 	
-	_sound.stream = load("res://sounds/zombie_death.wav")
-	_sound.play()
-	
-	$Collision.free()
-	$Hurtbox.free()
-	$VisionArea.free()
+	if $Collision:
+		$Collision.free()
+	if $Hurtbox:
+		$Hurtbox.free()
+	if $VisionArea:
+		$VisionArea.free()
 	isDead = true
 	$Timer.start(1)
 
@@ -146,7 +163,7 @@ func toogle_anim():
 func toogle_fade_timer():
 	if not isDead:
 		return
-	$Timer.paused = not $Timer.paused
+	$Timer.paused = IsPaused()
 
 func IsAlive():
 	return not isDead
@@ -164,7 +181,8 @@ func DoDamage(dmg, _actor : KinematicBody2D = null):
 		return
 	print("[ZOMBIE] Damage taken! ", dmg)
 	_sound.stream_paused = true
-	_pain.play()
+	if Settings.Sounds:
+		_pain.play()
 	health -= dmg
 	health_bar.value = health
 	
@@ -183,21 +201,37 @@ func _on_Timer_timeout():
 	first = false
 	$Timer.start(3)
 
-
 func _on_VisionArea_area_entered(area):
 	player = area.get_parent()
 	update_path()
 	if not _sound.playing and not _sound.stream_paused:
-		_sound.play()
-
+		if Settings.Sounds:
+			_sound.play()
 
 func _on_Model_animation_finished():
 	if $Model.animation == "attack":
 		change_anim = true
 		if collider:
 			collider.DoDamage(DAMAGE, self)
+			$Atk_Cooldown.start(1)
 
+func _on_Atk_Cooldown_timeout():
+	if collider:
+		$Model.animation = "attack"
+		change_anim = false
 
 func _on_Hurt_finished():
 	_pain.stop()
 	_sound.stream_paused = false
+
+func _on_Hurtbox_body_entered(body):
+	if body == self:
+		return
+	if body.has_method("DoDamage") and collider == null:
+		collider = body
+		$Model.animation = "attack"
+		change_anim = false
+
+func _on_Hurtbox_body_exited(body):
+	if body == collider:
+		collider = null

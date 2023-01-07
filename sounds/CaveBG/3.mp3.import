@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/3.mp3-4099e0ae0747beb86aae7227ad5a1788.mp3str"
+
+[deps]
+
+source_file="res://sounds/CaveBG/3.mp3"
+dest_files=[ "res://.import/3.mp3-4099e0ae0747beb86aae7227ad5a1788.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

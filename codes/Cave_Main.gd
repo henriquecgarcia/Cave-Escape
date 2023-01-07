@@ -8,7 +8,6 @@ var current_sublevel = 5
 var subLevel = preload("res://scenes/Cave_Sublevel.tscn")
 var exit = preload("res://scenes/Cave_Exit.tscn")
 var lvl_hist = []
-var paused = false
 var current_level
 
 func _ready():
@@ -21,14 +20,17 @@ func _ready():
 func change_level(new_level):
 	var cave = current_level
 	cave.queue_free()
+	
 	var lvl = subLevel.instance()
 	add_child_below_node($Hold, lvl)
+	
 	var index = maxLevels-new_level
 	if range(lvl_hist.size()).has(index):
 		lvl.start(lvl_hist[index].map)
 	else:
 		lvl.start()
 		lvl_hist.append({level = new_level, map = lvl.current_map})
+	
 	if new_level == 1:
 		var pos = lvl.Escada.position
 		lvl.Escada.queue_free()
@@ -41,12 +43,11 @@ func change_level(new_level):
 func sublevelup():
 	return change_level(current_sublevel-1)
 
-func _input(event):
+func _input(_event):
 	if not player.IsAlive():
 		return
-	if event.is_action_pressed("ui_esc"):
-		paused = not paused
-	if paused:
+	
+	if get_tree().paused:
 		change_center_text()
 		pause_all_timers()
 	else:

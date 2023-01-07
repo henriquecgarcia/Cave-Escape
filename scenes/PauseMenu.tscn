@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://codes/PauseMenu.gd" type="Script" id=2]
+
+[node name="PauseMenu" type="Control"]
+pause_mode = 2
+margin_left = 96.0
+margin_top = 48.0
+margin_right = 224.0
+margin_bottom = 144.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 121.0
+margin_bottom = 89.0
+text = "Reiniciar"
+flat = true
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 121.0
+margin_bottom = 89.0

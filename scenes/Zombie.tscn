@@ -68,10 +68,10 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 23.0
+radius = 18.0
 
 [sub_resource type="CircleShape2D" id=6]
-radius = 23.585
+radius = 25.5196
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 320.0
@@ -89,7 +89,7 @@ volume_db = -10.0
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 4 )
 animation = "idle"
-frame = 4
+frame = 3
 playing = true
 
 [node name="Hurt" type="AudioStreamPlayer2D" parent="Model"]
@@ -97,13 +97,11 @@ stream = ExtResource( 48 )
 area_mask = 2
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
 light_mask = 3
-position = Vector2( 0, 1 )
+position = Vector2( -5, 2 )
 shape = SubResource( 5 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 24, 0 )
 collision_layer = 3
 collision_mask = 3
@@ -137,11 +135,16 @@ text = "100/100"
 align = 1
 valign = 1
 
+[node name="Atk_Cooldown" type="Timer" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="animation_finished" from="Model" to="." method="_on_Model_animation_finished"]
 [connection signal="finished" from="Model/Hurt" to="." method="_on_Hurt_finished"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
+[connection signal="body_exited" from="Hurtbox" to="." method="_on_Hurtbox_body_exited"]
 [connection signal="area_entered" from="VisionArea" to="." method="_on_VisionArea_area_entered"]
 [connection signal="timeout" from="Recalculate_Route" to="." method="_on_Recalculate_Route_timeout"]
+[connection signal="timeout" from="Atk_Cooldown" to="." method="_on_Atk_Cooldown_timeout"]
 
 [editable path="Hurtbox"]
 [editable path="VisionArea"]
