@@ -396,7 +396,7 @@ playing = true
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 7 )
 animation = "handgun_idle"
-frame = 12
+frame = 4
 playing = true
 
 [node name="Gun_Default" type="Position2D" parent="Arms_Model"]
