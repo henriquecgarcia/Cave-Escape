@@ -30,41 +30,44 @@ margin_bottom = 451.0
 rect_scale = Vector2( 0.2, 0.2 )
 
 [node name="Resume" type="TextureButton" parent="Center"]
-margin_right = 602.0
+margin_right = 610.0
 margin_bottom = 200.0
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 3 )
 
 [node name="Quit" type="TextureButton" parent="Center"]
 margin_top = 204.0
-margin_right = 602.0
+margin_right = 610.0
 margin_bottom = 404.0
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 6 )
 
 [node name="GridContainer" type="GridContainer" parent="Center"]
 margin_top = 408.0
-margin_right = 602.0
+margin_right = 610.0
 margin_bottom = 608.0
-custom_constants/hseparation = 45
+custom_constants/hseparation = 5
 columns = 5
 
 [node name="Home" type="TextureButton" parent="Center/GridContainer"]
-margin_right = 112.0
+margin_right = 200.0
 margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
 texture_pressed = ExtResource( 11 )
 
 [node name="Som" type="TextureButton" parent="Center/GridContainer"]
-margin_left = 157.0
-margin_right = 357.0
+margin_left = 205.0
+margin_right = 405.0
 margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
 texture_normal = ExtResource( 9 )
 texture_pressed = ExtResource( 8 )
 
 [node name="Musica" type="TextureButton" parent="Center/GridContainer"]
-margin_left = 402.0
-margin_right = 602.0
+margin_left = 410.0
+margin_right = 610.0
 margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 10 )
 

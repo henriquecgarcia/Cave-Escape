@@ -1,4 +1,4 @@
-[gd_scene load_steps=277 format=2]
+[gd_scene load_steps=278 format=2]
 
 [ext_resource path="res://sounds/handgun_shot.mp3" type="AudioStream" id=1]
 [ext_resource path="res://codes/player_code.gd" type="Script" id=2]
@@ -377,6 +377,8 @@ radius = 20.0
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 4, 12.5 )
 
+[sub_resource type="RectangleShape2D" id=10]
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
@@ -396,7 +398,7 @@ playing = true
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 7 )
 animation = "handgun_idle"
-frame = 4
+frame = 5
 playing = true
 
 [node name="Gun_Default" type="Position2D" parent="Arms_Model"]
@@ -452,6 +454,13 @@ light_mask = 16
 position = Vector2( 13, 1 )
 shape = SubResource( 5 )
 
+[node name="Exit_Area" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit_Area"]
+shape = SubResource( 10 )
+
 [node name="Bullets" type="Node2D" parent="."]
 
 [node name="PlayerBG" type="AudioStreamPlayer2D" parent="."]
@@ -460,6 +469,7 @@ stream = ExtResource( 269 )
 [connection signal="animation_finished" from="Arms_Model" to="." method="_on_Arms_Model_animation_finished"]
 [connection signal="area_entered" from="Stair_Area" to="." method="_on_Stair_Area_area_entered"]
 [connection signal="area_exited" from="Stair_Area" to="." method="_on_Stair_Area_area_exited"]
+[connection signal="area_entered" from="Exit_Area" to="." method="_on_Exit_Area_area_entered"]
 [connection signal="finished" from="PlayerBG" to="." method="_on_PlayerBG_finished"]
 
 [editable path="Hurtbox"]

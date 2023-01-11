@@ -32,6 +32,7 @@ var projectile = preload("res://codes/Bullet.tscn")
 var watchAnimations = ["handgun_reload", "handgun_shoot", "rifle_reload", "rifle_shoot"]
 var currentWeapon = "handgun"
 var escada = null
+var exit = null
 var forceAnim = false
 var current_ammo = weapons[ currentWeapon ].ammo
 
@@ -107,6 +108,7 @@ func get_input():
 		#print("OI!!")
 		if get_parent().name == "Cave" :
 			get_parent().sublevelup()
+			return
 	
 	velocity = Vector2()
 	if Input.is_action_pressed("ui_left"):
@@ -329,3 +331,15 @@ func _on_PlayerBG_finished():
 	cur_sounds.shuffle()
 	_bg_sound.stream = cur_sounds.pop_front()
 	_bg_sound.play()
+
+func _on_Exit_Area_area_entered(area):
+	if not get_parent().name == "Cave":
+		if get_tree().change_scene("res://scenes/LoadingScene.tscn"):
+			get_tree().quit()
+		else:
+			var _main_scene = load("res://scenes/Cave_Main.tscn")
+		return
+	if area.name == "Cave_Exit":
+		get_parent().exit_cave()
+	elif area.name == "CaveEntry":
+		get_parent().change_level()

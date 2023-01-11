@@ -23,13 +23,13 @@ shape = SubResource( 1 )
 margin_left = -80.0
 margin_top = 120.0
 margin_right = 80.0
-margin_bottom = 160.0
+margin_bottom = 180.0
 color = Color( 0.411765, 0, 0, 1 )
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="TextureRect"]
 margin_right = 160.0
-margin_bottom = 40.0
-text = "Subir"
+margin_bottom = 60.0
+text = "Descer"
 align = 1
 valign = 1

@@ -3,14 +3,18 @@ extends Control
 onready var start_button = $GridContainer/Start_button
 onready var quit_button = $GridContainer/Quit_button
 
-func _ready():
-	pass # Replace with function body.
-
 func _on_Start_button_button_down():
 	start_button.rect_scale *= 1.75
 
 func _on_Start_button_button_up():
 	start_button.rect_scale /= 1.75
+	if get_tree().change_scene("res://scenes/LoadingScene.tscn"):
+		get_tree().quit()
+	else:
+		var _main_scene = load("res://scenes/Cave_Main.tscn")
+
+func _on_main_scene_loaded():
+	# Quando a cena principal for carregada, troque para ela
 	if get_tree().change_scene("res://scenes/Cave_Main.tscn"):
 		get_tree().quit()
 

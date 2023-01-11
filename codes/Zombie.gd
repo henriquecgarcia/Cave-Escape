@@ -50,7 +50,7 @@ func _ready():
 
 func set_sound_stats(stats):
 	if player:
-		if stats:
+		if stats and Settings.Sounds:
 			_sound.play()
 		else:
 			_sound.stop()
@@ -146,11 +146,11 @@ func Kill():
 		_sound.stream = load("res://sounds/zombie_death.wav")
 		_sound.play()
 	
-	if $Collision:
+	if get_node_or_null("Collision") != null:
 		$Collision.free()
-	if $Hurtbox:
+	if get_node_or_null("Hurtbox") != null:
 		$Hurtbox.free()
-	if $VisionArea:
+	if get_node_or_null("VisionArea") != null:
 		$VisionArea.free()
 	isDead = true
 	$Timer.start(1)

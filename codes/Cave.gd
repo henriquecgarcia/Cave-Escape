@@ -10,13 +10,15 @@ var paused = false
 var borders = Rect2(1, 1, 999, 999)
 var current_map = []
 var player
-var escada
+var EscadaUp
+var EscadaDown
 
 var walker
 
 var pCode = preload("res://scenes/Player.tscn")
 var zCode = preload("res://scenes/Zombie.tscn")
 var eCode = preload("res://scenes/Escada.tscn")
+var dCode = preload("res://scenes/Escada_Desce.tscn")
 var Map
 
 func _ready():
@@ -25,13 +27,14 @@ func _ready():
 func start(map = []):
 	walker = Walker.new(Vector2(5, 5), borders)
 	if len(map) < 50:
-		map = walker.walk(500)
+		map = walker.walk(200)
 	current_map = map.duplicate()
 	
 	var lastRoom = walker.get_end_room()
 	var stair = eCode.instance()
 	add_child_below_node(nav, stair)
 	stair.position = lastRoom.position * 32
+	EscadaUp = stair
 	
 	if get_parent().player:
 		player = get_parent().player
@@ -42,6 +45,11 @@ func start(map = []):
 	
 	player.position = map.front()*32
 	player.connect("PlayerDie", self, "playerDieText")
+	
+	var stair2 = dCode.instance()
+	add_child_below_node(EscadaUp, stair2)
+	stair2.position = player.position
+	EscadaDown = stair2
 	
 	var spawnedZombiesPos = []
 	for room in walker.rooms:
@@ -84,20 +92,6 @@ func get_zombies_in_room(room : Dictionary = {}) -> float:
 
 func GetAliveZombies():
 	return Zombies.get_child_count()
-
-func _input(event):
-	if not player.IsAlive():
-		return
-	
-	if event.is_action_pressed("ui_esc"):
-		paused = not paused
-	
-	if paused:
-		change_center_text()
-		pause_all_timers()
-	else:
-		change_center_text("")
-		pause_all_timers()
 
 func ZombieKilled(killer):
 	if killer == player:

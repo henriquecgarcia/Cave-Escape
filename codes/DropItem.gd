@@ -25,13 +25,13 @@ func get_item(player : KinematicBody2D = null):
 	if kills < 75:
 		return "handgun_ammo"
 	if kills < 75*4:
-		if wep <= .7:
+		if wep <= .7/2:
 			return "handgun_ammo"
 		return "rifle_ammo"
-	if wep <= 0.4:
+	if wep <= 0.2:
 		return "handgun_ammo"
-	wep -= 0.4
-	if wep <= 0.35:
+	wep -= 0.2
+	if wep <= 0.35/2:
 		return "rifle_ammo"
 	return "shotgun_ammo"
 

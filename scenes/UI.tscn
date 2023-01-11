@@ -1,17 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://codes/CenterText.gd" type="Script" id=1]
 [ext_resource path="res://scenes/UI_Health.tscn" type="PackedScene" id=2]
 [ext_resource path="res://codes/Weapon_Control.gd" type="Script" id=3]
 [ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://codes/ZombieKilled.gd" type="Script" id=5]
+[ext_resource path="res://image/ui/bullet.png" type="Texture" id=6]
 
 [node name="UI" type="CanvasLayer"]
 
 [node name="UI_Health" parent="." instance=ExtResource( 2 )]
 
 [node name="Weapon_Control" type="Control" parent="."]
-margin_left = 256.0
+margin_left = 250.0
 margin_right = 320.0
 margin_bottom = 16.0
 script = ExtResource( 3 )
@@ -27,6 +28,15 @@ margin_right = 64.0
 margin_bottom = 14.0
 align = 1
 valign = 1
+
+[node name="Bullet" type="TextureRect" parent="Weapon_Control"]
+margin_left = 56.0
+margin_right = 71.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 15, 15 )
+texture = ExtResource( 6 )
+expand = true
+flip_h = true
 
 [node name="CenterText" type="Label" parent="."]
 light_mask = 0
