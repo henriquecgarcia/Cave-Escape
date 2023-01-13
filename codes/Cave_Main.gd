@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var player = $Player
+const MainMenu := false
 
 const maxLevels : int = 5
 
@@ -68,3 +69,6 @@ func change_center_text(new_text = "Game Paused", color = Vector3(1, 1, 1), colo
 
 func playerDieText():
 	change_center_text("Game Over", Vector3(1, 0, 0))
+
+func set_center_text(txt):
+	current_level.set_center_text(txt)

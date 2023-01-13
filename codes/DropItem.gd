@@ -57,7 +57,22 @@ func Deploy(ply : KinematicBody2D = null, parent : KinematicBody2D = null) -> bo
 	model.texture = item_model
 	model.scale = Vector2(16, 16) / Vector2(item_model.get_width(), item_model.get_height())
 	position = parent.position
+	_type = item
 	return true
 
 func _on_DropItem_area_entered(area):
-	print(area.get_parent(), " entrou!")
+	if _type == null:
+		return
+	var ply = area.get_parent()
+	if ply.name != "Player":
+		return
+	if _type == "health":
+		var m_hp = PlayerStats.max_health
+		var hpp = m_hp - PlayerStats.health
+		hpp = int( hpp/5 )
+		hpp = randi() % hpp + 1
+		ply.AddHealth(hpp*5)
+	elif _type.ends_with("_ammo"):
+		var hold = _type.split("_")[0]
+		ply.AddMag(hold)
+	queue_free()

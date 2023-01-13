@@ -1,9 +1,14 @@
 extends Control
 
-#onready var btn = $Button
-
 func _ready():
 	visible = false
+	if muteStats:
+		sound_btn.texture_normal = muted
+		sound_btn.texture_pressed = muted_press
+	
+	if bgStats:
+		music_btn.texture_normal = mmuted
+		music_btn.texture_pressed = mmuted_press
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_esc"):
@@ -32,6 +37,9 @@ func _on_Quit_button_up():
 	get_tree().quit()
 
 #########################################################################
+############################# SMALL BUTTONS #############################
+#########################################################################
+
 onready var home = $Center/GridContainer/Home
 
 func _on_Home_button_down():
@@ -66,6 +74,7 @@ func _on_Som_button_up():
 		sound_btn.texture_pressed = som_press
 
 onready var music_btn = $Center/GridContainer/Musica
+
 const mmuted = preload("res://image/menu/musica_muted.png")
 const mmuted_press = preload("res://image/menu/musica_muted_pressed.png")
 const music = preload("res://image/menu/music.png")

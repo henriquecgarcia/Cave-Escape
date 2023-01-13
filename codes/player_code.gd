@@ -76,11 +76,12 @@ func _ready():
 	cur_sounds = bg_sounds.duplicate()
 	cur_sounds.shuffle()
 	_bg_sound.stream = cur_sounds.pop_front()
-	_bg_sound.play()
+	if Settings.Background:
+		_bg_sound.play()
 	
 	scale = Vector2(0.75, 0.75)
 	
-	bNode = get_parent().get_node("Bullets")
+	bNode = get_parent().get_node_or_null("Bullets")
 	
 	set_arms_animation()
 	set_feet_animation()
@@ -103,7 +104,8 @@ func set_feet_animation(newAnim = "idle"):
 		feet.frame = 0
 
 func get_input():
-	
+	if get_parent().MainMenu:
+		return
 	if Input.is_action_just_pressed("ui_accept") and escada != null:
 		#print("OI!!")
 		if get_parent().name == "Cave" :
@@ -122,15 +124,19 @@ func get_input():
 		velocity.y = SPEED
 	
 	if Input.is_key_pressed(KEY_R):
-		var sound = load("res://sounds/weapon_reload.ogg")
-		_shoot.stream = sound
-		_shoot.play()
-		
 		set_arms_animation("reload")
 		forceAnim = true
 		
 		current_ammo = weapons[ currentWeapon ].ammo
 		PlayerStats.ammo = current_ammo
+		
+		if not Settings.Sounds:
+			return
+		
+		var sound = load("res://sounds/weapon_reload.ogg")
+		_shoot.stream = sound
+		_shoot.play()
+		
 	elif Input.is_key_pressed(KEY_SPACE) or Input.is_action_pressed("ui_mouse_click"):
 		shoot()
 
@@ -141,6 +147,8 @@ func shoot():
 		return # Only one shot per 0.5 seconds...
 	lastShoot = Time.get_ticks_msec()
 	if current_ammo <= 0:
+		if not Settings.Sounds:
+			return
 		var sound = load("res://sounds/weapon_no-ammo.ogg")
 		_shoot.stream = sound
 		_shoot.play()
@@ -155,6 +163,8 @@ func shoot():
 	
 	PlayerStats.ammo = current_ammo
 	
+	if not Settings.Sounds:
+		return
 	var sound = load("res://sounds/" + currentWeapon + "_shot.mp3")
 	if sound:
 		_shoot.stream = sound
@@ -165,6 +175,8 @@ func _physics_process(_delta):
 		return
 	if IsPaused():
 		return
+	if get_parent().MainMenu:
+		return
 	
 	get_input()
 	
@@ -173,7 +185,7 @@ func _physics_process(_delta):
 	
 	if velocity != Vector2.ZERO:
 		var changed = false
-		set_arms_animation("move")
+		set_arms_animation("run")
 		
 		var rot = -(rotation_degrees + 180)
 		var rot_deg_abs = abs(rot)
@@ -277,6 +289,18 @@ func toogle_anim():
 
 func IsPaused():
 	return get_tree().paused
+
+func AddHealth(hp := 0):
+	get_parent().set_center_text("+"+str(hp)+" ponts de vida")
+	health += hp
+	PlayerStats.health = health
+
+func AddMag(wep, mags := 1):
+	if not wep in weapons.keys():
+		return
+	get_parent().set_center_text("+"+ str(mags) +" pente para "+wep)
+	weapons[wep].mags += mags
+	PlayerStats.add_magazine(wep, mags)
 
 func DoDamage(dmg, _actor):
 	print("[PLAYER] Damage taken:  ", dmg)

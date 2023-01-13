@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://codes/PauseMenu.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://image/menu/som.png" type="Texture" id=9]
 [ext_resource path="res://image/menu/musica_pressed.png" type="Texture" id=10]
 [ext_resource path="res://image/menu/home_pressed.png" type="Texture" id=11]
+[ext_resource path="res://image/menu/house.png" type="Texture" id=12]
 
 [node name="PauseMenu" type="Control"]
 pause_mode = 2
@@ -32,6 +33,7 @@ rect_scale = Vector2( 0.2, 0.2 )
 [node name="Resume" type="TextureButton" parent="Center"]
 margin_right = 610.0
 margin_bottom = 200.0
+rect_min_size = Vector2( 610, 200 )
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 3 )
 
@@ -39,6 +41,7 @@ texture_pressed = ExtResource( 3 )
 margin_top = 204.0
 margin_right = 610.0
 margin_bottom = 404.0
+rect_min_size = Vector2( 610, 200 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 6 )
 
@@ -46,6 +49,7 @@ texture_pressed = ExtResource( 6 )
 margin_top = 408.0
 margin_right = 610.0
 margin_bottom = 608.0
+rect_min_size = Vector2( 200, 200 )
 custom_constants/hseparation = 5
 columns = 5
 
@@ -53,6 +57,7 @@ columns = 5
 margin_right = 200.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
+texture_normal = ExtResource( 12 )
 texture_pressed = ExtResource( 11 )
 
 [node name="Som" type="TextureButton" parent="Center/GridContainer"]

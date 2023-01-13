@@ -4,7 +4,9 @@ onready var rng = RandomNumberGenerator.new()
 onready var Zombies = $Zombie
 onready var walls = $Nav/Walls
 onready var textDisplay = $UI/CenterText
+onready var pickDisplay = $UI/PickupTextArea
 onready var nav = $Nav
+const MainMenu := false
 
 var paused = false
 var borders = Rect2(1, 1, 999, 999)
@@ -117,3 +119,6 @@ func change_center_text(new_text = "Game Paused", color = Vector3(1, 1, 1), colo
 
 func playerDieText():
 	change_center_text("Game Over", Vector3(1, 0, 0))
+
+func set_center_text(txt):
+	pickDisplay.SetPickupText(txt)

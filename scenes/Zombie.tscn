@@ -89,7 +89,7 @@ volume_db = -10.0
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 4 )
 animation = "idle"
-frame = 3
+frame = 9
 playing = true
 
 [node name="Hurt" type="AudioStreamPlayer2D" parent="Model"]
